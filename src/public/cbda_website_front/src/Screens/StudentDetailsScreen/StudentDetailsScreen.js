@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import "./StudentDetailsScreen.css";
 import "bootstrap/dist/css/bootstrap.css";
 import useForm from "../../hooks/formValidate";
+import { Link } from "react-router-dom";
 
 export default function StudentDetailsScreen() {
   const [inputField, setInputField] = useState({
     username: "",
     email: "",
     phonenumber: "",
-    course: "",
   });
 
   const noTextError = () => {
     alert(inputField.phonenumber);
   };
-  const { handleChange, values, errors, handleSubmit } = useForm(noTextError);
+  const { handleChange, errors, handleSubmit } = useForm(noTextError);
 
   const inputsHandler = (e) => {
     setInputField({ [e.target.name]: e.target.value });
@@ -82,25 +82,9 @@ export default function StudentDetailsScreen() {
           </div>
         )}
         <br />
-        <label for="course" className="form-label">
-          Course
-        </label>
-        <select
-          id="course"
-          className="form-select"
-          placeholder="Course"
-          value={inputField.course}
-          onChange={inputsHandler}
-        >
-          <option value="BBA">BBA</option>
-          <option value="BCom">BCom</option>
-          <option value="LAW">Law</option>
-          <option value="BscPSY">Bsc. Psychology</option>
-          <option value="Oth">Other</option>
-        </select>
-        <br />
+
         <button type="submit" value="submit" className="submit btn btn-lg">
-          Submit
+          <Link to="/icebreaker">Submit</Link>
         </button>
       </form>
     </div>

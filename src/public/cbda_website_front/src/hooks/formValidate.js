@@ -89,9 +89,8 @@ const useForm = (callback) => {
   };
 
   return {
-    values,
-    errors,
     handleChange,
+    errors,
     handleSubmit,
   };
 };
