@@ -2,28 +2,43 @@ import React, { useState } from "react";
 import "./StudentDetailsScreen.css";
 import "bootstrap/dist/css/bootstrap.css";
 import useForm from "../../hooks/formValidate";
-import { Link } from "react-router-dom";
-
+import axios from "axios";
+import {REGISTER_URL} from "../../api_links.js"
 export default function StudentDetailsScreen() {
   const [inputField, setInputField] = useState({
     username: "",
     email: "",
-    phonenumber: "",
+    phonenumber: 0,
   });
 
-  const noTextError = () => {
-    alert(inputField.phonenumber);
+  function noTextError() {
+    axios({
+      method:"POST",
+      url:REGISTER_URL,
+      data: {
+        username:inputField.username,
+        email:inputField.email,
+        phone:inputField.phonenumber
+      }
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   };
   const { handleChange, errors, handleSubmit } = useForm(noTextError);
 
   const inputsHandler = (e) => {
     setInputField({ [e.target.name]: e.target.value });
     handleChange(e);
+    
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={noTextError}>
         <div className="mb-3">
           <label for="username" className="form-label">
             Your Name
@@ -84,7 +99,7 @@ export default function StudentDetailsScreen() {
         <br />
 
         <button type="submit" value="submit" className="submit btn btn-lg">
-          <Link to="/icebreaker">Submit</Link>
+          Submit
         </button>
       </form>
     </div>

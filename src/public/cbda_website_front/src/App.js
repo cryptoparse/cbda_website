@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <div className="container">
         <div className="row justify-content-center align-self-center">
-          <img src={logo} alt="Welcome!" />
+          
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<WelcomeScreen />} />
